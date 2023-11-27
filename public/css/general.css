@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Stardos+Stencil&display=swap');
+html{
+    --bg-color: #263D42;
+    --header-color: #63C7B2;
+    --txt-color: #CCDBDC;
+}
+body{
+    background-color: var(--bg-color);
+    transition: font-size 0.3s ease;
+    font-family: Open Sans, cursive;
+    font-size: 18px;
+    color: var(--txt-color);
+}
+nav{
+    background-color: var(--header-color);
+}
