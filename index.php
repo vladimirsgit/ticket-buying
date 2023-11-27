@@ -5,7 +5,9 @@ require_once 'vendor/autoload.php';
 
 $routes = [
     '/tickets/' => 'public/home.php',
-    '/tickets/register' => 'public/register_form.php'
+    '/tickets/register' => 'public/register_form.php',
+    '/tickets/login' => 'public/login_form.php',
+    '/tickets/confirmEmail' => 'src/confirm_email.php'
 ];
 
     if(array_key_exists($uri, $routes)){
