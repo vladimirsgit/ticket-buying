@@ -29,7 +29,9 @@ if(isset($_SESSION['username'])){
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
-
+            <?php if (isset($_SESSION['username_and_password_not_matching'])) { ?>
+                <p style="color: red">Username and password do not match!</p>
+            <?php } unset($_SESSION['username_and_password_not_matching']);?>
             <button name="login" id="login-button" type="submit" class="btn btn-primary">Log In</button>
 
         </form>

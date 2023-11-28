@@ -4,20 +4,22 @@ include 'models/user.php';
 require_once 'config.php';
 
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
 
 $repository = $entityManager->getRepository(User::class);
 
 $user = $repository->findOneBy(['username'=>$username]);
 
 if($user == null){
-    echo "Invalid data!";
+    $_SESSION['username_and_password_not_matching'] = true;
+    header('Location: http://localhost:8080/tickets/login');
     exit();
 }
 
 if(!password_verify($password, $user->getPassword())){
-    echo "Invalid data!";
+    $_SESSION['username_and_password_not_matching'] = true;
+    header('Location: http://localhost:8080/tickets/login');
     exit();
 }
 
