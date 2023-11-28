@@ -6,10 +6,14 @@ require_once 'vendor/autoload.php';
 $routes = [
     '/tickets/' => 'public/home.php',
     '/tickets/register' => 'public/register_form.php',
+    '/tickets/confirmEmail' => 'src/confirm_email.php',
     '/tickets/login' => 'public/login_form.php',
-    '/tickets/confirmEmail' => 'src/confirm_email.php'
+    '/tickets/logout' => 'src/logout.php',
+    '/tickets/profile' => 'public/profile.php'
 ];
-
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
     if(array_key_exists($uri, $routes)){
         require $routes[$uri];
 

@@ -10,7 +10,7 @@ $token = $_GET['token'] ?? ' ';
 //$token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ' ';
 
 $repository = $entityManager->getRepository(User::class);
-echo $username . "<<--------------->>" . $token;
+
 $criteria = [
     'username' => $username,
     'token' => $token
@@ -18,7 +18,6 @@ $criteria = [
 
 $user = $repository->findOneBy($criteria);
 
-echo $user->getUsername() . " <<--------------->> " . $user->getToken();
 
 #if its null it means we can just kill the script
 if($user == null){

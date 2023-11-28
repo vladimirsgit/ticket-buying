@@ -24,6 +24,12 @@ class User{
     private string $password;
 
     #[ORM\Column(type: 'string')]
+    private string $role = 'common';
+
+    #[ORM\Column(type: 'datetime')]
+    private DateTime $created;
+
+    #[ORM\Column(type: 'string')]
     private string $token;
 
     #[ORM\Column(type: 'boolean')]
@@ -109,6 +115,25 @@ class User{
         $this->password = $password;
     }
 
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
+    }
+
+    public function getCreated(): DateTime
+    {
+        return $this->created;
+    }
+
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
     public function getToken(): string
     {
         return $this->token;

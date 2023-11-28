@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-include 'includes/header.html';
+include 'includes/header.php';
 ?>
 <p>404 ERROR PAGE NOT FOUND</p>
 </div>

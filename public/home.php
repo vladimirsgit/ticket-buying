@@ -10,8 +10,10 @@
 </head>
 <body>
     <?php
-    include 'includes/header.html';
-    ?>
+    include 'includes/header.php';
+    if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
+        $_SESSION['welcome'] = false;
 
+    ?> <h1>WELCOME!</h1> <?php } ?>
 </body>
 </html>

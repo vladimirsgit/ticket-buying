@@ -10,7 +10,7 @@
 </head>
 <body>
 <?php
-include 'includes/header.html';
+include 'includes/header.php';
 ?>
 <main>
     <div class="container mt-5">

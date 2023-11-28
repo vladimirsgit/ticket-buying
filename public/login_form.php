@@ -10,7 +10,10 @@
 </head>
 <body>
 <?php
-include 'includes/header.html';
+include 'includes/header.php';
+if(isset($_SESSION['username'])){
+    header('Location: http://localhost:8080/tickets/profile');
+}
 ?>
 <main>
     <div class="container mt-5">
@@ -32,6 +35,10 @@ include 'includes/header.html';
         </form>
     </div>
 </main>
-
+<?php
+if(isset($_POST['login'])){
+    require 'src/login_data.php';
+}
+?>
 </body>
 </html>
