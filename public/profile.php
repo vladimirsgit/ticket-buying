@@ -1,5 +1,8 @@
-<?php
-if(!isset($_SESSION['username'])){
+<?php if(isset($_POST['updateProfile'])){
+    require 'src/update_profile.php';
+}
+?>
+<?php if(!isset($_SESSION['username'])){
     header('Location: http://localhost:8080/tickets/login');
 }
 ?>
@@ -22,6 +25,7 @@ include 'includes/header.php';
         <h1 class="text-center">Profile</h1>
         <form id="update_profile_form" action="profile" method="post">
             <div class="form-group">
+
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo htmlspecialchars($_SESSION['username'])?>" readonly>
             </div>
@@ -51,22 +55,37 @@ include 'includes/header.php';
                 <label for="newPassword">New Password</label>
                 <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Complete only if you want to change your password">
             </div>
-
-
+            <?php if (isset($_SESSION['newpassword_confirm_not_matching'])) {?>
+                <p style="color: red">New password and confirm new password fields do not match!</p>
+            <?php } unset($_SESSION['newpassword_confirm_not_matching']);?>
             <div class="form-group">
                 <label for="confirmedNewPassword">Confirm New Password</label>
                 <input type="password" class="form-control" id="confirmedNewPassword" name="confirmedNewPassword" placeholder="Complete only if you want to change your password">
             </div>
-
+            <div class="form-group">
+                <?php if (isset($_SESSION['demoted'])) {?>
+                    <p style="color: red">Admin rights revoked! You have been demoted!</p>
+                <?php } unset($_SESSION['demoted']);?>
+                <label for="username">Role</label>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="role" name="role" placeholder="<?php echo htmlspecialchars($_SESSION['role'])?>" readonly>
+            </div>
             <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning">Update</button>
             <button name="deleteProfile" id="delete-profile-button" type="submit" class="btn btn-danger">Delete Account (irreversible)</button>
+            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']);?>">
+            <?php if (isset($_SESSION['user_not_found'])) { ?>
+                <p style="color: red">User not found</p>
+            <?php } unset($_SESSION['user_not_found']);?>
+            <?php if (isset($_SESSION['invalid_credentials'])) { ?>
+                <p style="color: red">Invalid credentials</p>
+            <?php } unset($_SESSION['invalid_credentials']);?>
+            <?php if (isset($_SESSION['update_success'])) { ?>
+                <p style="color: #30bde7">Profile updated successfully!</p>
+            <?php } unset($_SESSION['update_success']);?>
         </form>
     </div>
 </main>
-<?php
-if(isset($_POST['updateProfile'])){
-    require 'src/updateProfile.php';
-}
-?>
+
 </body>
 </html>

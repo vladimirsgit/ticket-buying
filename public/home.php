@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tickets reservation</title>
+    <title>Ticketastic</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/reset.css" type="text/css" rel="stylesheet">
     <link href="public/css/general.css" type="text/css" rel="stylesheet">
@@ -13,7 +13,9 @@
     include 'includes/header.php';
     if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
         $_SESSION['welcome'] = false;
-
     ?> <h1>WELCOME!</h1> <?php } ?>
+    <?php if (isset($_SESSION['csrf_attack'])) { ?>
+        <p style="color: red">Possible attack, be careful of the links that you click on!</p>
+    <?php } unset($_SESSION['csrf_attack']);?>
 </body>
 </html>

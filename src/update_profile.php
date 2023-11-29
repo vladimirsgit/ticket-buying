@@ -2,9 +2,9 @@
 global $entityManager;
 include 'models/user.php';
 require_once 'config.php';
-require 'utils/functionsForValidation.php';
-require 'utils/sendProfileUpdateEmail.php';
-require 'utils/updateUserData.php';
+require 'utils/functions_for_validation.php';
+require 'utils/send_profile_update_email.php';
+require 'utils/update_user_data.php';
 
 $username = $_SESSION['username'] ?? '';
 
@@ -22,8 +22,7 @@ $repository = $entityManager->getRepository(User::class);
 $user = $repository->findOneBy(['username' => $_SESSION['username']]);
 
 if($user == null){
-    echo "User not found";
-    exit;
+    setSessionAttributeAndRedirect('user_not_found', '/tickets/profile');
 }
 
 validateName($lastname, $firstname);
@@ -31,20 +30,18 @@ validateName($lastname, $firstname);
 validateEmailAndUsername($email);
 
 if(!empty($newPassword) && $newPassword != $confirmedNewPassword){
-    echo "New password and confirm new password fields do not match!";
-    exit;
+    setSessionAttributeAndRedirect('newpassword_confirm_not_matching', '/tickets/profile');
 }
 
 if(!password_verify($password, $user->getPassword())){
-    echo "Check your password";
-    exit;
+    setSessionAttributeAndRedirect('invalid_credentials', '/tickets/profile');
 }
 
 updateUserData($user, !empty($newPassword), $lastname, $firstname, $email, $newPassword);
 $entityManager->persist($user);
 $entityManager->flush();
 
-echo "Profile updated successfully!";
+setSessionAttributeAndRedirect('update_success', '/tickets/profile');
 
 $newPassword = !empty($newPassword) ? "True" : "False";
 sendProfileUpdateEmail($email, $username, $lastname, $firstname, $newPassword);

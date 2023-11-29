@@ -2,8 +2,10 @@
 global $entityManager;
 include 'models/user.php';
 require_once 'config.php';
-require 'utils/validateRegistration.php';
-require 'utils/sendConfirmationEmail.php';
+require 'utils/validate_registration.php';
+require 'utils/send_confirmation_email.php';
+
+checkCSRFtoken();
 
 $lastname = $_POST['lastname'] ?? '';
 $firstname = $_POST['firstname'] ?? '';
@@ -15,9 +17,7 @@ $confirmed_password = $_POST['confirmPassword'] ?? '';
 $repository = $entityManager->getRepository(User::class);
 
 if($repository->findOneBy(['username' => $username])){
-    $_SESSION['username_taken'] = true;
-    header('Location: http://localhost:8080/tickets/register');
-    exit;
+    setSessionAttributeAndRedirect('username_taken', '/tickets/register');
 }
 
 validateRegistrationFormData($lastname, $firstname, $email, $username, $password, $confirmed_password);

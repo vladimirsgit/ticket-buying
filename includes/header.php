@@ -1,11 +1,7 @@
-<?php
-//    if(session_status() === PHP_SESSION_NONE){
-//        session_start();
-//    }
-?>
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/tickets">PHP TICKETS</a>
+        <a class="navbar-brand" href="/tickets">TICKETASTIC</a>
         <div class="menu" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -20,9 +16,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/tickets/profile"><?php echo htmlspecialchars($_SESSION['username'])?>'s profile</a>
                 </li>
+                        <?php
+                        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+                            ?>  <li class="nav-item">
+                                <a class="nav-link" href="/tickets/adminDashboard">Admin dashboard</a>
+                            </li> <?php }  ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/tickets/logout">Log Out [<?php echo htmlspecialchars($_SESSION['username'])?>]</a>
                         </li>
+
                 <?php } else {?>
                 <li class="nav-item">
                     <a class="nav-link" href="/tickets/login">Log In</a>

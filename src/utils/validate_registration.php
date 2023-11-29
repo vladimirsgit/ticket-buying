@@ -1,5 +1,5 @@
 <?php
-require 'functionsForValidation.php';
+require 'functions_for_validation.php';
 function validateRegistrationFormData($lastname, $firstname, $email, $username, $password, $confirmed_password): void {
 
     checkIfFieldsAreEmpty($lastname, $firstname, $email, $username, $password, $confirmed_password);
@@ -7,8 +7,6 @@ function validateRegistrationFormData($lastname, $firstname, $email, $username, 
     validateEmailAndUsername($email, $username);
 
     if($password !== $confirmed_password){
-        $_SESSION['passwords_not_matching'] = true;
-        header('Location: http://localhostL8080/tickets/register');
-        exit;
+        setSessionAttributeAndRedirect('passwords_not_matching', 'Location: /tickets/register');
     }
 }

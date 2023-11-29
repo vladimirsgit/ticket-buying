@@ -1,9 +1,14 @@
+<?php
+if(isset($_POST['register'])){
+    require 'src/register_data.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tickets reservation</title>
+    <title>Registration</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/reset.css" type="text/css" rel="stylesheet">
     <link href="public/css/general.css" type="text/css" rel="stylesheet">
@@ -71,16 +76,12 @@ include 'includes/header.php';
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
             </div>
-
+            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <button name="register" id="register-button" type="submit" class="btn btn-primary">Register</button>
 
         </form>
     </div>
 </main>
-<?php
-if(isset($_POST['register'])){
-    require 'src/register_data.php';
-}
-?>
+
 </body>
 </html>

@@ -1,19 +1,22 @@
+<?php if(isset($_SESSION['username'])){
+    header('Location: http://localhost:8080/tickets/profile');
+}
+if (isset($_POST['login'])) {
+    require 'src/login_data.php';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tickets reservation</title>
+    <title>Log In</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="public/css/reset.css" type="text/css" rel="stylesheet">
     <link href="public/css/general.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<?php
-include 'includes/header.php';
-if(isset($_SESSION['username'])){
-    header('Location: http://localhost:8080/tickets/profile');
-}
+<?php include 'includes/header.php';
 ?>
 <main>
     <div class="container mt-5">
@@ -33,14 +36,10 @@ if(isset($_SESSION['username'])){
                 <p style="color: red">Username and password do not match!</p>
             <?php } unset($_SESSION['username_and_password_not_matching']);?>
             <button name="login" id="login-button" type="submit" class="btn btn-primary">Log In</button>
-
+            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
         </form>
     </div>
 </main>
-<?php
-if(isset($_POST['login'])){
-    require 'src/login_data.php';
-}
-?>
+
 </body>
 </html>
