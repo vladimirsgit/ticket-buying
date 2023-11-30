@@ -1,8 +1,10 @@
 <?php global $entityManager;
-require 'src/admin_validation.php';
+require 'src/validate_admin_rights.php';
 if(isset($_POST['roleAction'])){
     require 'src/change_role.php';
-}?>
+} else if(isset($_POST['add_event'])){
+    require 'src/add_event.php';
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,43 +18,8 @@ if(isset($_POST['roleAction'])){
 <body>
 <?php include 'includes/header.php';?>
     <main>
-        <?php if (isset($_SESSION['invalid_action'])) {?>
-            <p style="color: red">Invalid action request!</p>
-        <?php } unset($_SESSION['invalid_action']);?>
-        <?php if (isset($_SESSION['role_change_OK'])) { ?>
-            <p style="color: #30bde7">User with the id: <?php echo $_SESSION['user_role_changed_id']?> was successfully <?php echo $_SESSION['action_made']?>!</p>
-        <?php } unset($_SESSION['role_change_OK']);?>
-        <table class="table table-striped table-hover table-dark table-bordered">
-            <thead>
-            <tr>
-                <th colspan="4" class="text-center bg-info" >Users</th>
-            </tr>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Role</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
-            <?php
-            $userRepository = $entityManager->getRepository(User::class);
-            $users = $userRepository->findAll();
-            foreach ($users as $user){
-                ?> <tr>
-                    <td><?php echo htmlspecialchars($user->getId()); ?></td>
-                    <td><?php echo htmlspecialchars($user->getUsername()); ?></td>
-                    <td><?php echo htmlspecialchars($user->getRole()); ?></td>
-                    <td>
-                        <form method="post" action="adminDashboard" class="d-inline">
-                            <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>"/>
-                            <input type="submit" class="btn btn-primary btn-sm" name="roleAction" value="promote"/>
-                        </form>
-                        <form method="post" action="adminDashboard" class="d-inline">
-                            <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>"/>
-                            <input type="submit" class="btn btn-warning btn-sm" name="roleAction" value="demote"/>
-                        </form>
-                    </td>
-                </tr> <?php }?>
+       <?php include 'includes/add_event_form.php';
+       include 'includes/users_table.php';?>
     </main>
 
 </body>

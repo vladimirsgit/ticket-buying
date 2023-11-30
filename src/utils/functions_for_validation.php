@@ -1,12 +1,13 @@
 <?php
-function checkIfFieldsAreEmpty(): void {
+function checkIfFieldsAreEmpty(): bool {
     $args = func_get_args();
 
     foreach ($args as $arg){
         if(empty($arg)){
-            setSessionAttributeAndRedirect('empty_fields', '/tickets/register');
+            return true;
         }
     }
+    return false;
 }
 
 function validateName($lastname, $firstname): void {
@@ -35,4 +36,17 @@ function setSessionAttributeAndRedirect($attribute, $headerLocation): void {
     $_SESSION[$attribute] = true;
     header('Location: ' . $headerLocation);
     exit;
+}
+
+function validateDate($date, $format = 'Y-m-d'): bool{
+    $d = DateTime::createFromFormat($format, $date);
+    $currentDate = new DateTime();
+    $currentDate->setTime(0, 0, 0);
+
+    return $d && $d->format($format) == $date && $d > $currentDate;
+}
+
+function validateTime($time, $format = 'H:i'): bool{
+    $t = DateTime::createFromFormat($format, $time);
+    return $t && $t->format($format) == $time;
 }

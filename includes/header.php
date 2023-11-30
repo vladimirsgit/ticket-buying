@@ -5,7 +5,10 @@
         <div class="menu" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/tickets">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/tickets">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tickets/events">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/tickets/register">Register</a>

@@ -1,7 +1,7 @@
 <?php
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 require_once 'vendor/autoload.php';
-
+require_once 'config.php';
 
 $routes = [
     '/tickets/' => 'public/home.php',
@@ -10,7 +10,8 @@ $routes = [
     '/tickets/login' => 'public/login_form.php',
     '/tickets/logout' => 'src/logout.php',
     '/tickets/profile' => 'public/profile.php',
-    '/tickets/adminDashboard' => 'public/admin_dashboard.php'
+    '/tickets/adminDashboard' => 'public/admin_dashboard.php',
+    '/tickets/events' => 'public/events.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();

@@ -1,7 +1,7 @@
 <?php
 global $entityManager;
 require_once 'models/user.php';
-require_once 'models/role_changes.php';
+require_once 'models/role_change.php';
 require 'utils/functions_for_validation.php';
 require_once 'config.php';
 
