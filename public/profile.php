@@ -1,5 +1,7 @@
 <?php if(isset($_POST['updateProfile'])){
     require 'src/update_profile.php';
+} else if(isset($_POST['deleteProfile'])){
+    require 'src/delete_account.php';
 }
 ?>
 <?php if(!isset($_SESSION['username'])){
@@ -72,7 +74,7 @@ include 'includes/header.php';
                 <input type="text" class="form-control" id="role" name="role" placeholder="<?php echo htmlspecialchars($_SESSION['role'])?>" readonly>
             </div>
             <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning">Update</button>
-            <button name="deleteProfile" id="delete-profile-button" type="submit" class="btn btn-danger">Delete Account (irreversible)</button>
+            <button name="deleteProfile" id="delete-profile-button" type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete Account (irreversible)</button>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']);?>">
             <?php if (isset($_SESSION['user_not_found'])) { ?>
                 <p style="color: red">User not found</p>
@@ -86,6 +88,7 @@ include 'includes/header.php';
         </form>
     </div>
 </main>
-
+<script src="public/js/confirm_deletion.js"></script>
 </body>
+
 </html>

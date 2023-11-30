@@ -30,8 +30,12 @@ if($actionToBeMade == 'promote' && $user->getRole() == 'admin' || $actionToBeMad
     setSessionAttributeAndRedirect('invalid_action', '/tickets/adminDashboard');
 }
 
+
 $adminId = $userRepository->findOneBy(['username' => $_SESSION['username']])->getId();
 
+if($userToBeChangedId == $adminId){
+    setSessionAttributeAndRedirect('invalid_action', '/tickets/adminDashboard');
+}
 //create the role_change DB entry
 $role_change = new Role_changes($adminId, $userToBeChangedId, $actionToBeMade);
 

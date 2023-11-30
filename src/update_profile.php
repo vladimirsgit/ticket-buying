@@ -6,6 +6,8 @@ require 'utils/functions_for_validation.php';
 require 'utils/send_profile_update_email.php';
 require 'utils/update_user_data.php';
 
+checkCSRFtoken();
+
 $username = $_SESSION['username'] ?? '';
 
 $lastname = !empty($_POST['lastname']) ? $_POST['lastname'] : $_SESSION['lastname'];

@@ -10,12 +10,15 @@
 </head>
 <body>
     <?php
-    include 'includes/header.php';
-    if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
-        $_SESSION['welcome'] = false;
-    ?> <h1>WELCOME!</h1> <?php } ?>
-    <?php if (isset($_SESSION['csrf_attack'])) { ?>
-        <p style="color: red">Possible attack, be careful of the links that you click on!</p>
-    <?php } unset($_SESSION['csrf_attack']);?>
+    include 'includes/header.php';?>
+    <main>
+        <?php
+        if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
+            $_SESSION['welcome'] = false;
+            ?> <h1>WELCOME!</h1> <?php } ?>
+        <?php if (isset($_SESSION['csrf_attack'])) { ?>
+            <p style="color: red">Possible attack, be careful of the links that you click on!</p>
+        <?php } unset($_SESSION['csrf_attack']);?>
+    </main>
 </body>
 </html>

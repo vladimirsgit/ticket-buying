@@ -3,6 +3,7 @@ html{
     --bg-color: #263D42;
     --header-color: #63C7B2;
     --txt-color: #CCDBDC;
+    --margin-spacing: 5em;
 }
 body{
     background-color: var(--bg-color);
@@ -10,6 +11,12 @@ body{
     font-family: Open Sans, cursive;
     font-size: 18px;
     color: var(--txt-color);
+}
+
+main{
+    margin-left: var(--margin-spacing);
+    margin-right: var(--margin-spacing);
+    margin-top: var(--margin-spacing);
 }
 nav{
     background-color: var(--header-color);
