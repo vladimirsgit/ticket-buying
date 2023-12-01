@@ -25,7 +25,7 @@
                                 <a class="nav-link" href="/tickets/adminDashboard">Admin dashboard</a>
                             </li> <?php }  ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/tickets/logout">Log Out [<?php echo htmlspecialchars($_SESSION['username'])?>]</a>
+                            <a class="nav-link" href="/tickets/logout.php">Log Out [<?php echo htmlspecialchars($_SESSION['username'])?>]</a>
                         </li>
 
                 <?php } else {?>
