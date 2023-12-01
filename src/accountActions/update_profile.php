@@ -2,9 +2,9 @@
 global $entityManager;
 include 'models/user.php';
 require_once 'config.php';
-require 'utils/functions_for_validation.php';
-require 'utils/send_profile_update_email.php';
-require 'utils/update_user_data.php';
+require 'src/utils/functions_for_validation.php';
+require 'src/utils/sendEmails/send_profile_update_email.php';
+require 'src/utils/update_user_data.php';
 
 checkCSRFtoken();
 

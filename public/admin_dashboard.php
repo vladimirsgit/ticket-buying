@@ -1,9 +1,9 @@
 <?php global $entityManager;
-require 'src/validate_admin_rights.php';
+require 'src/adminActions/validate_admin_rights.php';
 if(isset($_POST['roleAction'])){
-    require 'src/change_role.php';
+    require 'src/adminActions/change_role.php';
 } else if(isset($_POST['add_event'])){
-    require 'src/add_event.php';
+    require 'src/adminActions/add_event.php';
 } ?>
 <!DOCTYPE html>
 <html lang="en">

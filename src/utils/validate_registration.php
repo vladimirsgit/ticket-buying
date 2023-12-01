@@ -6,7 +6,7 @@ function validateRegistrationFormData($lastname, $firstname, $email, $confirmed_
         setSessionAttributeAndRedirect('empty_fields', '/tickets/register');
     }
     validateName($lastname, $firstname);
-    validateEmailAndUsername($email, $username);
+    validateEmailAndPossiblyUsername($email, $username);
 
     if($email !== $confirmed_email){
         setSessionAttributeAndRedirect('emails_not_matching', '/tickets/register');

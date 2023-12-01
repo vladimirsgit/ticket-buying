@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['register'])){
-    require 'src/register_data.php';
+    require 'src/registration/register_data.php';
 }
 ?>
 <!DOCTYPE html>

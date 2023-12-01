@@ -1,7 +1,7 @@
 <?php if(isset($_POST['updateProfile'])){
-    require 'src/update_profile.php';
+    require 'src/accountActions/update_profile.php';
 } else if(isset($_POST['deleteProfile'])){
-    require 'src/delete_account.php';
+    require 'src/accountActions/delete_account.php';
 }
 ?>
 <?php if(!isset($_SESSION['username'])){

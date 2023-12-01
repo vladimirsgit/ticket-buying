@@ -2,7 +2,7 @@
     header('Location: http://localhost:8080/tickets/profile');
 }
 if (isset($_POST['login'])) {
-    require 'src/login_data.php';
+    require 'src/accountActions/login_data.php';
 }
 ?>
 <!DOCTYPE html>
@@ -35,10 +35,19 @@ if (isset($_POST['login'])) {
             <?php if (isset($_SESSION['username_and_password_not_matching'])) { ?>
                 <p style="color: red">Username and password do not match!</p>
             <?php } unset($_SESSION['username_and_password_not_matching']);?>
+            <?php if (isset($_SESSION['email_not_confirmed'])) { ?>
+                <p style="color: red">Please confirm your email!</p>
+            <?php } unset($_SESSION['email_not_confirmed']);?>
+            <?php if (isset($_SESSION['password_changed'])) {?>
+                <p style="color: red">You can now login using your new password!</p>
+            <?php } unset($_SESSION['password_changed']);?>
+            <p class="mb-3"><a href="/tickets/forgotPassword">Forgot password</a></p>
             <button name="login" id="login-button" type="submit" class="btn btn-primary">Log In</button>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+
         </form>
     </div>
+
 </main>
 
 </body>

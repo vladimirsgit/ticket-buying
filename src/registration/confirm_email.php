@@ -6,14 +6,11 @@ require_once 'config.php';
 $username = $_GET['username'] ?? ' ';
 $token = $_GET['token'] ?? ' ';
 
-//$username = isset($_GET['username']) ? htmlspecialchars($_GET['username']) : ' ';
-//$token = isset($_GET['token']) ? htmlspecialchars($_GET['token']) : ' ';
-
 $repository = $entityManager->getRepository(User::class);
 
 $criteria = [
     'username' => $username,
-    'token' => $token
+    'email_token' => $token
 ];
 
 $user = $repository->findOneBy($criteria);

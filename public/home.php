@@ -13,12 +13,23 @@
     include 'includes/header.php';?>
     <main>
         <?php
+//        foreach ($_SESSION as $key => $value) {
+//            try {
+//                echo "Session Key: $key ---" . $value . "<br>";
+//            } catch (Error $e){
+//                echo $e->getMessage() . "<br>";
+//            }
+//        }
         if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
             $_SESSION['welcome'] = false;
-            ?> <h1>WELCOME!</h1> <?php } ?>
+            ?> <h1>WELCOME!</h1> <?php }  ?>
         <?php if (isset($_SESSION['csrf_attack'])) { ?>
             <p style="color: red">Possible attack, be careful of the links that you click on!</p>
         <?php } unset($_SESSION['csrf_attack']);?>
+        <?php if (isset($_SESSION['invalid_pass_change'])) { ?>
+            <p style="color: red">Invalid data token/username for password change.</p>
+        <?php } unset($_SESSION['invalid_pass_change']);?>
+
     </main>
 </body>
 </html>

@@ -18,7 +18,7 @@ function validateName($lastname, $firstname): void {
     }
 }
 
-function validateEmailAndUsername($email,  $username = null, $headerLocation = '/tickets/register'): void {
+function validateEmailAndPossiblyUsername($email, $username = null, $headerLocation = '/tickets/register'): void {
     if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
         setSessionAttributeAndRedirect('email_invalid', $headerLocation);
     } else if($username != null && !preg_match("/^[A-Za-z0-9#_.]{3,20}$/", $username)){
@@ -32,7 +32,7 @@ function validateNewEmail($newEmail, $confirmedNewEmail): void{
             setSessionAttributeAndRedirect('newEmail_not_matching', '/tickets/profile');
         } else if($newEmail === $_SESSION['email']){
             setSessionAttributeAndRedirect('email_the_same', '/tickets/profile');
-        } else validateEmailAndUsername($newEmail, null, '/tickets/profile');
+        } else validateEmailAndPossiblyUsername($newEmail, null, '/tickets/profile');
     }
 }
 

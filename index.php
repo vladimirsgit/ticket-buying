@@ -6,12 +6,15 @@ require_once 'config.php';
 $routes = [
     '/tickets/' => 'public/home.php',
     '/tickets/register' => 'public/register_form.php',
-    '/tickets/confirmEmail' => 'src/confirm_email.php',
+    '/tickets/confirmEmail' => 'src/registration/confirm_email.php',
     '/tickets/login' => 'public/login_form.php',
-    '/tickets/logout' => 'src/logout.php',
+    '/tickets/logout' => 'src/accountActions/logout.php',
     '/tickets/profile' => 'public/profile.php',
     '/tickets/adminDashboard' => 'public/admin_dashboard.php',
-    '/tickets/events' => 'public/events.php'
+    '/tickets/events' => 'public/events.php',
+    '/tickets/forgotPassword' => 'public/forgot_password_form.php',
+    '/tickets/changePassword' => 'src/accountActions/validate_password_recovery_token_and_username.php',
+    '/tickets/setNewPassword' => 'public/set_new_password.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();

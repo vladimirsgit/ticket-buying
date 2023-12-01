@@ -18,7 +18,7 @@ include 'includes/header.php';?>
         <h2 class="mb-2">Upcoming Events</h2>
         <div class="list-group">
 
-            <?php include 'src/events_pagination.php';
+            <?php include 'src/adminActions/events_pagination.php';
             ?>
         </div>
         <div class="pagination justify-content-center">

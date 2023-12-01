@@ -30,10 +30,13 @@ class User{
     private DateTime $created;
 
     #[ORM\Column(type: 'string')]
-    private string $token;
+    private string $email_token;
 
     #[ORM\Column(type: 'boolean')]
     private bool $confirmedEmail = false;
+
+    #[ORM\Column(type: 'string')]
+    private ?string $reset_password_token = '';
 
     /**
      * @param string $username
@@ -50,7 +53,7 @@ class User{
         $this->firstname = $firstname;
         $this->email = $email;
         $this->password = $password;
-        $this->token = $token;
+        $this->email_token = $token;
     }
 
 
@@ -134,14 +137,14 @@ class User{
     {
         $this->created = $created;
     }
-    public function getToken(): string
+    public function getEmailToken(): string
     {
-        return $this->token;
+        return $this->email_token;
     }
 
-    public function setToken(string $token): void
+    public function setEmailToken(string $email_token): void
     {
-        $this->token = $token;
+        $this->email_token = $email_token;
     }
 
     public function isConfirmedEmail(): bool
@@ -153,6 +156,17 @@ class User{
     {
         $this->confirmedEmail = $confirmedEmail;
     }
+
+    public function getResetPasswordtoken(): ?string
+    {
+        return $this->reset_password_token;
+    }
+
+    public function setResetPasswordtoken(string $reset_password_token): void
+    {
+        $this->reset_password_token = $reset_password_token;
+    }
+
 
 
 }
