@@ -49,7 +49,13 @@ include 'includes/header.php';
                 <?php if (isset($_SESSION['email_invalid'])) { ?>
                     <p style="color: red">Email address invalid!</p>
                 <?php } unset($_SESSION['email_invalid']);?>
-
+            </div>
+            <div class="form-group">
+                <label for="confirmEmail">Confirm email address</label>
+                <input type="email" class="form-control" id="confirmEmail" name="confirmEmail" placeholder="Confirm email" required pattern="^[A-Za-z0-9#\._\-]+@[A-Za-z0-9\-]+\.[A-Za-z]+$">
+                <?php if (isset($_SESSION['emails_not_matching'])) { ?>
+                    <p style="color: red">Email addresses do not match!</p>
+                <?php } unset($_SESSION['emails_not_matching']);?>
             </div>
 
             <div class="form-group">

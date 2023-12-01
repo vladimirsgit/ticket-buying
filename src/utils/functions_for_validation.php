@@ -18,14 +18,32 @@ function validateName($lastname, $firstname): void {
     }
 }
 
-function validateEmailAndUsername($email, $username = null): void {
-    if(($email == '') || !filter_var($email, FILTER_VALIDATE_EMAIL)){
-        setSessionAttributeAndRedirect('email_invalid', '/tickets/register');
+function validateEmailAndUsername($email,  $username = null, $headerLocation = '/tickets/register'): void {
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+        setSessionAttributeAndRedirect('email_invalid', $headerLocation);
     } else if($username != null && !preg_match("/^[A-Za-z0-9#_.]{3,20}$/", $username)){
-        setSessionAttributeAndRedirect('username_invalid', '/tickets/register');
+        setSessionAttributeAndRedirect('username_invalid', $headerLocation);
     }
 }
 
+function validateNewEmail($newEmail, $confirmedNewEmail): void{
+    if(!empty($newEmail)){
+        if($newEmail !== $confirmedNewEmail){
+            setSessionAttributeAndRedirect('newEmail_not_matching', '/tickets/profile');
+        } else if($newEmail === $_SESSION['email']){
+            setSessionAttributeAndRedirect('email_the_same', '/tickets/profile');
+        } else validateEmailAndUsername($newEmail, null, '/tickets/profile');
+    }
+}
+
+function validateProfileUpdatePasswordFields($password, $user, $newPassword = null, $confirmedNewPassword = null): void{
+    if(!empty($newPassword) && $newPassword !== $confirmedNewPassword){
+        setSessionAttributeAndRedirect('newpassword_confirm_not_matching', '/tickets/profile');
+    }
+    if(!password_verify($password, $user->getPassword())){
+        setSessionAttributeAndRedirect('invalid_credentials', '/tickets/profile');
+    }
+}
 function checkCSRFtoken(): void{
     if(!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])){
         setSessionAttributeAndRedirect('csrf_attack', '/tickets/');

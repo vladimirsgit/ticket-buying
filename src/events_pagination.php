@@ -7,7 +7,10 @@ $page = max($page, 1);
 $eventRepository = $entityManager->getRepository(Event::class);
 $events = $eventRepository->findAll();
 
-for($i = $page * 5 - 5; $i < $page * 5; $i++){
+usort($events, function ($a, $b){
+    return $a->getDate()->getTimestamp() - $b->getDate()->getTimestamp();
+});
+for($i = $page * 5 - 5; $i < $page * 5 && $i < sizeof($events); $i++){
     $event = $events[$i];
     ?> <a style="background-color: #1f2342" href="event_details.php?id=<?php echo $event->getId(); ?>" class="list-group-item list-group-item-action flex-column align-items-start mb-3">
         <div  class="d-flex w-100 justify-content-between">

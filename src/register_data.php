@@ -10,6 +10,7 @@ checkCSRFtoken();
 $lastname = $_POST['lastname'] ?? '';
 $firstname = $_POST['firstname'] ?? '';
 $email = $_POST['email'] ?? '';
+$confirmed_email = $_POST['confirmEmail'] ?? '';
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 $confirmed_password = $_POST['confirmPassword'] ?? '';
@@ -20,7 +21,7 @@ if($repository->findOneBy(['username' => $username])){
     setSessionAttributeAndRedirect('username_taken', '/tickets/register');
 }
 
-validateRegistrationFormData($lastname, $firstname, $email, $username, $password, $confirmed_password);
+validateRegistrationFormData($lastname, $firstname, $email, $confirmed_email, $username, $password, $confirmed_password);
 
 $password = password_hash($password, PASSWORD_DEFAULT);
 $emailToken = bin2hex(openssl_random_pseudo_bytes(64));

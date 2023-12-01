@@ -22,7 +22,8 @@ include 'includes/header.php';?>
             ?>
         </div>
         <div class="pagination justify-content-center">
-            <?php for($i = 1; $i <= sizeof($events) / 5; $i++){
+            <?php $forLimit = sizeof($events) % 5 == 0 ? sizeof($events) / 5 : sizeof($events) / 5 + 1;
+            for($i = 1; $i <= $forLimit; $i++){
                 ?> <a style="margin-right: 2em; font-size: 20px"  href="/tickets/events?page=<?php echo $i; ?>"><?php echo $i; ?></a>
             <?php } ?>
         </div>

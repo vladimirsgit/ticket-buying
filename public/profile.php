@@ -26,6 +26,15 @@ include 'includes/header.php';
     <div class="container mt-5">
         <h1 class="text-center">Profile</h1>
         <form id="update_profile_form" action="profile" method="post">
+            <?php if (isset($_SESSION['user_not_found'])) { ?>
+                <p style="color: red">User not found</p>
+            <?php } unset($_SESSION['user_not_found']);?>
+            <?php if (isset($_SESSION['invalid_credentials'])) { ?>
+                <p style="color: red">Invalid credentials</p>
+            <?php } unset($_SESSION['invalid_credentials']);?>
+            <?php if (isset($_SESSION['update_success'])) { ?>
+                <p style="color: #30bde7">Profile updated successfully!</p>
+            <?php } unset($_SESSION['update_success']);?>
             <div class="form-group">
 
                 <label for="username">Username</label>
@@ -44,13 +53,29 @@ include 'includes/header.php';
 
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo htmlspecialchars($_SESSION['email'])?>" pattern="^[A-Za-z0-9#\._\-]+@[A-Za-z0-9\-]+\.[A-Za-z]+$">
+                <input type="email" class="form-control" id="email" name="email" placeholder="<?php echo htmlspecialchars($_SESSION['email'])?>" readonly>
             </div>
-
 
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+            <?php if (isset($_SESSION['email_the_same'])) {?>
+                <p style="color: red">New email and old email are the same!</p>
+            <?php } unset($_SESSION['email_the_same']);?>
+            <div class="form-group">
+                <label for="newEmail">New Email</label>
+                <input type="" class="form-control" id="newEmail" name="newEmail" placeholder="Complete only if you want to change your email" >
+            </div>
+            <?php if (isset($_SESSION['email_invalid'])) {?>
+                <p style="color: red">Invalid email address</p>
+            <?php } unset($_SESSION['email_invalid']);?>
+            <?php if (isset($_SESSION['newEmail_not_matching'])) {?>
+                <p style="color: red">New email and confirm new email fields do not match!</p>
+            <?php } unset($_SESSION['newEmail_not_matching']);?>
+            <div class="form-group">
+                <label for="confirmNewEmail">Confirm New Email</label>
+                <input type="" class="form-control" id="confirmNewEmail" name="confirmNewEmail" placeholder="Complete only if you want to change your email">
             </div>
 
             <div class="form-group">
@@ -64,27 +89,19 @@ include 'includes/header.php';
                 <label for="confirmedNewPassword">Confirm New Password</label>
                 <input type="password" class="form-control" id="confirmedNewPassword" name="confirmedNewPassword" placeholder="Complete only if you want to change your password">
             </div>
+
             <div class="form-group">
                 <?php if (isset($_SESSION['demoted'])) {?>
                     <p style="color: red">Admin rights revoked! You have been demoted!</p>
                 <?php } unset($_SESSION['demoted']);?>
-                <label for="username">Role</label>
-            </div>
-            <div class="form-group">
+                <label for="role">Role</label>
                 <input type="text" class="form-control" id="role" name="role" placeholder="<?php echo htmlspecialchars($_SESSION['role'])?>" readonly>
             </div>
+
             <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning">Update</button>
             <button name="deleteProfile" id="delete-profile-button" type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete Account (irreversible)</button>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']);?>">
-            <?php if (isset($_SESSION['user_not_found'])) { ?>
-                <p style="color: red">User not found</p>
-            <?php } unset($_SESSION['user_not_found']);?>
-            <?php if (isset($_SESSION['invalid_credentials'])) { ?>
-                <p style="color: red">Invalid credentials</p>
-            <?php } unset($_SESSION['invalid_credentials']);?>
-            <?php if (isset($_SESSION['update_success'])) { ?>
-                <p style="color: #30bde7">Profile updated successfully!</p>
-            <?php } unset($_SESSION['update_success']);?>
+
         </form>
     </div>
 </main>
