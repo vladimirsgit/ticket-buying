@@ -1,7 +1,6 @@
 <?php
 global $entityManager;
 include 'models/user.php';
-require_once 'config.php';
 require 'src/utils/functions_for_validation.php';
 
 checkCSRFtoken();

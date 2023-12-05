@@ -1,7 +1,6 @@
 <?php
 global $entityManager;
 require_once 'models/user.php';
-require_once 'config.php';
 
 if(!isset($_SESSION['username'])){
     header('Location: /tickets/login');

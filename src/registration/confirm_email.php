@@ -1,7 +1,6 @@
 <?php
 global $entityManager;
 include 'models/user.php';
-require_once 'config.php';
 
 $username = $_GET['username'] ?? ' ';
 $token = $_GET['token'] ?? ' ';
