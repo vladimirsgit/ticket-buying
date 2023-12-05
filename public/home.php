@@ -29,6 +29,9 @@
         <?php if (isset($_SESSION['invalid_pass_change'])) { ?>
             <p style="color: red">Invalid data token/username for password change.</p>
         <?php } unset($_SESSION['invalid_pass_change']);?>
+        <?php if (isset($_SESSION['invalid_data'])) { ?>
+            <p style="color: red">You have been redirected because the data was invalid.</p>
+        <?php } unset($_SESSION['invalid_data']);?>
 
     </main>
 </body>

@@ -113,7 +113,7 @@ class Event{
         $this->total_tickets = $total_tickets;
     }
 
-    public function getSoldTickets(): string
+    public function getSoldTickets(): int
     {
         return $this->sold_tickets;
     }
@@ -123,7 +123,7 @@ class Event{
         $this->sold_tickets = $sold_tickets;
     }
 
-    public function getPrice(): string
+    public function getPrice(): float
     {
         return $this->price;
     }

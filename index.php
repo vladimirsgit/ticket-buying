@@ -14,7 +14,8 @@ $routes = [
     '/tickets/events' => 'public/events.php',
     '/tickets/forgotPassword' => 'public/forgot_password_form.php',
     '/tickets/change_password.php' => 'src/accountActions/validate_password_recovery_token_and_username.php',
-    '/tickets/setNewPassword' => 'public/set_new_password.php'
+    '/tickets/setNewPassword' => 'public/set_new_password.php',
+    '/tickets/eventDetails' => 'public/event_details.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();
