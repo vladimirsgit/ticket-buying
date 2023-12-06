@@ -13,6 +13,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/tickets/register"><span class="fa-solid fa-file-invoice"></span> Register</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tickets/contact"><span class="fa-solid fa-address-book"></span> Contact Us</a>
+                </li>
                 <?php
                     if(isset($_SESSION['username'])){
                 ?>

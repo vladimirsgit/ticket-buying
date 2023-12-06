@@ -1,7 +1,7 @@
 <?php
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 require_once 'vendor/autoload.php';
-require_once 'config.php';
+require_once 'db_config.php';
 
 $routes = [
     '/tickets/' => 'public/home.php',
@@ -10,6 +10,7 @@ $routes = [
     '/tickets/login' => 'public/login_form.php',
     '/tickets/logout.php' => 'src/accountActions/logout.php',
     '/tickets/profile' => 'public/profile.php',
+    '/tickets/contact' => 'public/contact_us.php',
     '/tickets/adminDashboard' => 'public/admin_dashboard.php',
     '/tickets/events' => 'public/events.php',
     '/tickets/forgotPassword' => 'public/forgot_password_form.php',
