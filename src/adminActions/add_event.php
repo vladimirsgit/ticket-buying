@@ -1,6 +1,6 @@
 <?php global $entityManager;
-require 'src/utils/functions_for_validation.php';
-require 'models/event.php';
+require_once 'src/utils/functions_for_validation.php';
+require_once 'models/event.php';
 
 checkCSRFtoken();
 

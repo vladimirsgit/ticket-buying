@@ -15,7 +15,10 @@ $routes = [
     '/tickets/forgotPassword' => 'public/forgot_password_form.php',
     '/tickets/change_password.php' => 'src/accountActions/validate_password_recovery_token_and_username.php',
     '/tickets/setNewPassword' => 'public/set_new_password.php',
-    '/tickets/eventDetails' => 'public/event_details.php'
+    '/tickets/eventDetails' => 'public/event_details.php',
+    '/tickets/add_to_cart.php' => 'src/ticketBuying/add_to_cart.php',
+    '/tickets/cart' => 'public/shopping_cart.php',
+    '/tickets/update_cart.php' => 'src/ticketBuying/update_cart.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();

@@ -1,6 +1,6 @@
 <?php global $entityManager;
-require 'models/user.php';
-require 'src/utils/functions_for_validation.php';
+require_once 'models/user.php';
+require_once 'src/utils/functions_for_validation.php';
 
 $username = $_GET['username'] ?? '';
 $token = $_GET['token'] ?? '';

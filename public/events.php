@@ -1,5 +1,5 @@
 <?php global $entityManager,$events;
-require 'models/event.php'; ?>
+require_once 'models/event.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

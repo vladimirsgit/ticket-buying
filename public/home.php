@@ -13,13 +13,9 @@
     include 'includes/header.php';?>
     <main>
         <?php
-//        foreach ($_SESSION as $key => $value) {
-//            try {
-//                echo "Session Key: $key ---" . $value . "<br>";
-//            } catch (Error $e){
-//                echo $e->getMessage() . "<br>";
-//            }
-//        }
+            $timeZone= new DateTimeZone('UTC');
+            $timeNow = new DateTime('now', $timeZone);
+            echo $timeNow->format('Y-m-d H:i:s.u');
         if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
             $_SESSION['welcome'] = false;
             ?> <h1>WELCOME!</h1> <?php }  ?>

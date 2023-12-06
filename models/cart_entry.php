@@ -2,8 +2,8 @@
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: "cart")]
-class Cart{
+#[ORM\Table(name: "cart_entries")]
+class CartEntry{
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: "users")]
     #[ORM\Column(type: 'integer')]
@@ -15,21 +15,24 @@ class Cart{
     private int $eventId;
 
     #[ORM\Column(type: 'integer')]
-    private string $quantity;
+    private int $quantity;
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $created_at;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $expired = false;
     /**
      * @param int $userId
      * @param int $eventId
      * @param string $quantity
      */
-    public function __construct(int $userId, int $eventId, string $quantity)
+    public function __construct(int $userId, int $eventId, int $quantity)
     {
         $this->userId = $userId;
         $this->eventId = $eventId;
         $this->quantity = $quantity;
+        $this->created_at = new DateTime('now', new DateTimeZone('UTC'));
     }
 
     public function getUserId(): int
@@ -52,12 +55,12 @@ class Cart{
         $this->eventId = $eventId;
     }
 
-    public function getQuantity(): string
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
-    public function setQuantity(string $quantity): void
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -72,6 +75,15 @@ class Cart{
         $this->created_at = $created_at;
     }
 
+    public function isExpired(): bool
+    {
+        return $this->expired;
+    }
+
+    public function setExpired(bool $expired): void
+    {
+        $this->expired = $expired;
+    }
 
 
 }

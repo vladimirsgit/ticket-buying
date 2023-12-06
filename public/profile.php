@@ -98,8 +98,11 @@ include 'includes/header.php';
                 <input type="text" class="form-control" id="role" name="role" placeholder="<?php echo htmlspecialchars($_SESSION['role'])?>" readonly>
             </div>
 
-            <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning">Update</button>
-            <button name="deleteProfile" id="delete-profile-button" type="submit" class="btn btn-danger" onclick="confirmDelete()">Delete Account (irreversible)</button>
+            <div class="d-flex justify-content-between">
+                <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning mr-2">Update</button>
+                <button name="deleteProfile" id="delete-profile-button" class="btn btn-danger">Delete Account (irreversible)</button>
+            </div>
+
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']);?>">
 
         </form>

@@ -16,6 +16,7 @@
                 <th scope="col">Actions</th>
             </tr>
             </thead>
+            <tbody>
             <?php
             $userRepository = $entityManager->getRepository(User::class);
             $users = $userRepository->findAll();
@@ -28,10 +29,13 @@
                         <form method="post" action="adminDashboard" class="d-inline">
                             <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>"/>
                             <input type="submit" class="btn btn-primary btn-sm" name="roleAction" value="promote"/>
+                            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                         </form>
                         <form method="post" action="adminDashboard" class="d-inline">
                             <input type="hidden" name="user_id" value="<?php echo $user->getId(); ?>"/>
                             <input type="submit" class="btn btn-warning btn-sm" name="roleAction" value="demote"/>
+                            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                         </form>
                     </td>
                 </tr> <?php }?>
+            </tbody>

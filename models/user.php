@@ -27,7 +27,7 @@ class User{
     private string $role = 'common';
 
     #[ORM\Column(type: 'datetime')]
-    private DateTime $created;
+    private DateTime $created_at;
 
     #[ORM\Column(type: 'string')]
     private string $email_token;
@@ -54,6 +54,7 @@ class User{
         $this->email = $email;
         $this->password = $password;
         $this->email_token = $token;
+
     }
 
 
@@ -128,14 +129,14 @@ class User{
         $this->role = $role;
     }
 
-    public function getCreated(): DateTime
+    public function getCreatedAt(): DateTime
     {
-        return $this->created;
+        return $this->created_at;
     }
 
-    public function setCreated(DateTime $created): void
+    public function setCreatedAt(DateTime $created_at): void
     {
-        $this->created = $created;
+        $this->created_at = $created_at;
     }
     public function getEmailToken(): string
     {

@@ -25,13 +25,15 @@ class Event{
     private int $total_tickets;
 
     #[ORM\Column(type: 'integer')]
+    private int $reserved_tickets = 0;
+    #[ORM\Column(type: 'integer')]
     private int $sold_tickets = 0;
-
     #[ORM\Column(type: 'decimal', precision: 7, scale: 2)]
     private float $price;
 
     #[ORM\Column(type: 'text')]
     private string $description;
+
 
     /**
      * @param string $name
@@ -112,6 +114,17 @@ class Event{
     {
         $this->total_tickets = $total_tickets;
     }
+
+    public function getReservedTickets(): int
+    {
+        return $this->reserved_tickets;
+    }
+
+    public function setReservedTickets(int $reserved_tickets): void
+    {
+        $this->reserved_tickets = $reserved_tickets;
+    }
+
 
     public function getSoldTickets(): int
     {

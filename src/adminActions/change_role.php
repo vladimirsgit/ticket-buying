@@ -4,6 +4,8 @@ require_once 'models/user.php';
 require_once 'models/role_change.php';
 require 'src/utils/functions_for_validation.php';
 
+checkCSRFtoken();
+
 $userRepository = $entityManager->getRepository(User::class);
 
 $userToBeChangedId = $_POST['user_id'] ?? null;
@@ -13,13 +15,13 @@ $actionToBeMade = $_POST['roleAction'] ?? null;
 if($actionToBeMade !== 'promote' && $actionToBeMade !== 'demote'){
     setSessionAttributeAndRedirect('invalid_action', '/tickets/adminDashboard');
 }
-//if theres no user id or if its not integer or if we have no action to be made, then its invalid
-if($userToBeChangedId == null || !filter_var($userToBeChangedId, FILTER_VALIDATE_INT) || $actionToBeMade == null){
+//if theres no user id or if we have no action to be made, then its invalid
+if($userToBeChangedId == null || $actionToBeMade == null){
     setSessionAttributeAndRedirect('invalid_action', '/tickets/adminDashboard');
 }
 
 //if we cannot find the user by its id, then its not valid
-$user = $userRepository->findOneBy(['id' => $userToBeChangedId]);
+$user = $userRepository->find($userToBeChangedId);
 if($user == null){
     setSessionAttributeAndRedirect('invalid_action', '/tickets/adminDashboard');
 }

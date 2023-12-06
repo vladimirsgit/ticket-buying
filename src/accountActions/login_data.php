@@ -1,7 +1,7 @@
 <?php
 global $entityManager;
-include 'models/user.php';
-require 'src/utils/functions_for_validation.php';
+require_once 'models/user.php';
+require_once 'src/utils/functions_for_validation.php';
 
 checkCSRFtoken();
 
@@ -31,7 +31,7 @@ $_SESSION['username'] = $user->getUsername();
 $_SESSION['lastname'] = $user->getLastname();
 $_SESSION['firstname'] = $user->getFirstname();
 $_SESSION['email'] = $user->getEmail();
-$_SESSION['created'] = $user->getCreated();
+$_SESSION['created'] = $user->getCreatedAt();
 $_SESSION['role'] = $user->getRole();
 $_SESSION['welcome'] = true;
 

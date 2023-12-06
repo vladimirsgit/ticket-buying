@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/tickets/logout.php"><span class="fa-solid fa-right-from-bracket"></span> Log Out [<?php echo htmlspecialchars($_SESSION['username'])?>]</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tickets/cart"><span class="fa-solid fa-cart-shopping"></span> Cart</a>
+                        </li>
 
                 <?php } else {?>
                 <li class="nav-item">

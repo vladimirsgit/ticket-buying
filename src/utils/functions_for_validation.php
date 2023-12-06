@@ -50,8 +50,8 @@ function checkCSRFtoken(): void{
     }
 }
 
-function setSessionAttributeAndRedirect($attribute, $headerLocation): void {
-    $_SESSION[$attribute] = true;
+function setSessionAttributeAndRedirect($attribute, $headerLocation, $message = null): void {
+    $_SESSION[$attribute] = $message ?: true;
     header('Location: ' . $headerLocation);
     exit;
 }

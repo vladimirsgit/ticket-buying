@@ -1,7 +1,7 @@
 <?php global $entityManager;
-require 'models/user.php';
-require 'src/utils/functions_for_validation.php';
-require 'src/utils/sendEmails/send_password_changed_email.php';
+require_once 'models/user.php';
+require_once 'src/utils/functions_for_validation.php';
+require_once 'src/utils/sendEmails/send_password_changed_email.php';
 
 checkCSRFtoken();
 

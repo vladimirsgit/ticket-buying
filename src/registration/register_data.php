@@ -1,8 +1,8 @@
 <?php
 global $entityManager;
-include 'models/user.php';
-require 'src/utils/validate_registration.php';
-require 'src/utils/sendEmails/send_confirmation_email.php';
+require_once 'models/user.php';
+require_once 'src/utils/validate_registration.php';
+require_once 'src/utils/sendEmails/send_confirmation_email.php';
 
 checkCSRFtoken();
 
