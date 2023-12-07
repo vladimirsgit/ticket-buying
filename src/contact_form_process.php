@@ -1,5 +1,5 @@
 <?php require_once 'src/utils/functions_for_validation.php';
-
+require_once 'src/utils/sendEmails/send_contact_form_email.php';
 checkCSRFtoken();
 
 $name = $_POST['name'] ?? '';
@@ -21,3 +21,5 @@ if(!$email){
     setSessionAttributeAndRedirect('invalid_email', '/tickets/contact');
 }
 
+sendContactFormEmailToUser($email, $name, $message);
+sendContactFormEmailToOwner($email, $name, $subject, $message);

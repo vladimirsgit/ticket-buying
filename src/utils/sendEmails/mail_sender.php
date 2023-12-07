@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once 'vendor/autoload.php';
 require_once 'mail_config.php';
 
-function sendEmail($to, $subject, $message): void {
+function sendEmail($to, $subject, $message, $name = ''): void {
     global $mailUsername, $mailPassword;
 
     $mail = new PHPMailer(true);
@@ -22,7 +22,7 @@ function sendEmail($to, $subject, $message): void {
         $mail->Password = $mailPassword;
 
         $mail->setFrom($mailUsername, 'Ticketastic');
-        $mail->addAddress($to);
+        $mail->addAddress($to, $name);
 
         $mail->Subject = $subject;
         $mail->AltBody = 'To view this post you need a compatible HTML viewer!';
