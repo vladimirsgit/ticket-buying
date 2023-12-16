@@ -14,9 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($_SESSION['username'])?>'s profile</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/reset.css" type="text/css" rel="stylesheet">
-    <link href="public/css/general.css" type="text/css" rel="stylesheet">
+    <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
 <?php
@@ -99,8 +97,10 @@ include 'includes/header.php';
             </div>
 
             <div class="d-flex justify-content-between">
-                <button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning mr-2">Update</button>
-                <button name="deleteProfile" id="delete-profile-button" class="btn btn-danger">Delete Account (irreversible)</button>
+                <?php if(isset($_COOKIE['ok_cookies'])){
+                    ?><button name="updateProfile" id="update-profile-button" type="submit" class="btn btn-warning mr-2">Update</button>
+                    <button name="deleteProfile" id="delete-profile-button" class="btn btn-danger">Delete Account (irreversible)</button><?php } else {?>
+                    <span>Please accept cookies in order to submit.</span> <?php } ?>
             </div>
 
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']);?>">
@@ -110,5 +110,7 @@ include 'includes/header.php';
 </main>
 <script src="public/js/confirm_deletion.js"></script>
 </body>
-
+<?php
+include 'includes/footer.php';
+?>
 </html>

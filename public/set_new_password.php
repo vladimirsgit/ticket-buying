@@ -14,9 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticketastic</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/reset.css" type="text/css" rel="stylesheet">
-    <link href="public/css/general.css" type="text/css" rel="stylesheet">
+    <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
 <?php
@@ -37,7 +35,10 @@ include 'includes/header.php';?>
                 <label for="confirmedNewPassword">Confirm New Password</label>
                 <input type="password" class="form-control" id="confirmedNewPassword" name="confirmedNewPassword" placeholder="Confirm new password">
             </div>
-            <button name="changePassword" type="submit" class="btn btn-primary btn-block">Change Password</button>
+
+            <?php if(isset($_COOKIE['ok_cookies'])){
+                ?><button name="changePassword" type="submit" class="btn btn-primary btn-block">Change Password</button><?php } else {?>
+                <span>Please accept cookies in order to submit.</span> <?php } ?>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
         </form>
@@ -45,4 +46,7 @@ include 'includes/header.php';?>
 
 </main>
 </body>
+<?php
+include 'includes/footer.php';
+?>
 </html>

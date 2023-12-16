@@ -21,7 +21,7 @@ $user = $repository->findOneBy($criteria);
 
 
 #if its null it means we can just kill the script
-if($user == null || !$user->isConfirmedEmail()){
+if($user == null || !$user->isConfirmedemail()){
     http_response_code(400);
     require 'views/400.php';
     echo "INVALID DATA";

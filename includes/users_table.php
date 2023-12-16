@@ -19,7 +19,7 @@
             <tbody>
             <?php
             $userRepository = $entityManager->getRepository(User::class);
-            $users = $userRepository->findAll();
+            $users = $userRepository->findBy(['confirmedemail' => true]);
             foreach ($users as $user){
                 ?> <tr>
                     <td><?php echo htmlspecialchars($user->getId()); ?></td>

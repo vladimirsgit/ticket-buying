@@ -7,9 +7,7 @@ require_once 'models/event.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ticketastic</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/reset.css" type="text/css" rel="stylesheet">
-    <link href="public/css/general.css" type="text/css" rel="stylesheet">
+    <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
 <?php
@@ -69,7 +67,10 @@ $_SESSION['event_id_for_cart'] = $eventId;
                 - You are not allowed to make more than 2 reservations in a 12-hour period.<br>
                 - Editing your cart does not reset the 10 minutes timer. <br>
             </p>
-            <button name="addToCart" class="btn btn-primary mt-1" type="submit" >Add to Cart</button>
+
+            <?php if(isset($_COOKIE['ok_cookies'])){
+                ?><button name="addToCart" class="btn btn-primary mt-1" type="submit" >Add to Cart</button><?php } else {?>
+                <span>Please accept cookies in order to submit.</span> <?php } ?>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
         </form>
     </div> <?php } else { ?> <div class="mt-3">
@@ -77,19 +78,7 @@ $_SESSION['event_id_for_cart'] = $eventId;
     </div> <?php } ?>
 </main>
 </body>
-<script>
-        // window.onload = ()=>{
-        //     let date = document.getElementById("dateOkForReservation");
-        //     console.log(date.innerText)
-        //     if(date){
-        //         date = new Date(date.innerText);
-        //         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        //         document.getElementById("dateOkForReservation").innerText = date.toLocaleString('ro', {
-        //             timeZone: userTimeZone,
-        //             hour12: true
-        //         });
-        //     }
-        // }
-
-</script>
+<?php
+include 'includes/footer.php';
+?>
 </html>

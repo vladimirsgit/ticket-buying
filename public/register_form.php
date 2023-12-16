@@ -9,9 +9,7 @@ if(isset($_POST['register'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/reset.css" type="text/css" rel="stylesheet">
-    <link href="public/css/general.css" type="text/css" rel="stylesheet">
+    <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
 <?php
@@ -61,7 +59,7 @@ include 'includes/header.php';
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required pattern="[A-Za-z0-9#_.]{3,20}$">
-                <?php if(isset($_SESSION['username_taken'])) {?> <p style="color: red">Username taken!</p> <?php } unset($_SESSION['usernametaken']); ?>
+                <?php if(isset($_SESSION['username_taken'])) {?> <p style="color: red">Username taken!</p> <?php } unset($_SESSION['username_taken']); ?>
                 <?php if (isset($_SESSION['username_invalid'])) { ?>
                     <p style="color: red">Username invalid!</p>
                 <?php } unset($_SESSION['username_invalid']);?>
@@ -82,12 +80,25 @@ include 'includes/header.php';
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
             </div>
-            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
-            <button name="register" id="register-button" type="submit" class="btn btn-primary">Register</button>
 
+            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <div class="g-recaptcha" data-sitekey="6Lc5oTMpAAAAAG4oieBzD9EUdemq7_UUdTt9D_eq"></div>
+            <?php if(isset($_COOKIE['ok_cookies'])){
+
+                ?><button name="register" id="register-button" type="submit" class="btn btn-primary">Register</button><?php } else {?>
+                <span>Please accept cookies in order to submit.</span> <?php } ?>
+
+            <?php if(isset($_SESSION['captcha_failed'])) {?>
+            <span>CAPTCHA FAILED</span>
+            <?php } unset($_SESSION['captcha_failed']);?>
         </form>
     </div>
 </main>
 
 </body>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<?php
+include 'includes/footer.php';
+?>
 </html>

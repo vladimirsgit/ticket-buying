@@ -1,5 +1,7 @@
 <?php require_once 'src/utils/functions_for_validation.php';
 require_once 'src/utils/sendEmails/send_contact_form_email.php';
+require_once 'src/utils/verify_recaptcha.php';
+
 checkCSRFtoken();
 
 $name = $_POST['name'] ?? '';

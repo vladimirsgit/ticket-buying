@@ -3,6 +3,9 @@ global $entityManager;
 require_once 'models/user.php';
 require_once 'src/utils/validate_registration.php';
 require_once 'src/utils/sendEmails/send_confirmation_email.php';
+require_once 'src/utils/verify_recaptcha.php';
+
+
 
 checkCSRFtoken();
 

@@ -33,7 +33,7 @@ class User{
     private string $email_token;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $confirmedEmail = false;
+    private bool $confirmedemail = false;
 
     #[ORM\Column(type: 'string')]
     private ?string $reset_password_token = '';
@@ -148,14 +148,14 @@ class User{
         $this->email_token = $email_token;
     }
 
-    public function isConfirmedEmail(): bool
+    public function isConfirmedemail(): bool
     {
-        return $this->confirmedEmail;
+        return $this->confirmedemail;
     }
 
-    public function setConfirmedEmail(bool $confirmedEmail): void
+    public function setConfirmedemail(bool $confirmedemail): void
     {
-        $this->confirmedEmail = $confirmedEmail;
+        $this->confirmedemail = $confirmedemail;
     }
 
     public function getResetPasswordtoken(): ?string

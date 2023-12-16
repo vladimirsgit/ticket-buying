@@ -11,9 +11,7 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="public/css/reset.css" type="text/css" rel="stylesheet">
-    <link href="public/css/general.css" type="text/css" rel="stylesheet">
+    <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
 <?php include 'includes/header.php';
@@ -42,13 +40,18 @@ if (isset($_POST['login'])) {
                 <p style="color: red">You can now login using your new password!</p>
             <?php } unset($_SESSION['password_changed']);?>
             <p class="mb-3"><a href="/tickets/forgotPassword">Forgot password</a></p>
-            <button name="login" id="login-button" type="submit" class="btn btn-primary">Log In</button>
-            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
+            <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+            <?php if(isset($_COOKIE['ok_cookies'])){
+                ?><button name="login" id="login-button" type="submit" class="btn btn-primary">Log In</button><?php } else {?>
+                <span>Please accept cookies in order to submit.</span> <?php } ?>
         </form>
     </div>
 
 </main>
 
 </body>
+<?php
+include 'includes/footer.php';
+?>
 </html>

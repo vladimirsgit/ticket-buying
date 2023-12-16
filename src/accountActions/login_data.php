@@ -16,7 +16,7 @@ if($user == null){
     setSessionAttributeAndRedirect('username_and_password_not_matching', '/tickets/login');
 }
 
-if(!$user->isConfirmedEmail()){
+if(!$user->isConfirmedemail()){
     setSessionAttributeAndRedirect('email_not_confirmed', '/tickets/login');
 }
 

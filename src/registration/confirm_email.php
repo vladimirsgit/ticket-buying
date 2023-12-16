@@ -22,7 +22,7 @@ if($user == null){
     echo "INVALID DATA";
     die();
 }
-$user->setConfirmedEmail(true);
+$user->setConfirmedemail(true);
 
 $entityManager->persist($user);
 $entityManager->flush();
