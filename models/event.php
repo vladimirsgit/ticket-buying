@@ -156,6 +156,18 @@ class Event{
         $this->description = $description;
     }
 
+    public function isSoldOut(): bool {
+        return $this->reserved_tickets + $this->sold_tickets == $this->total_tickets;
+    }
+
+    public function buyTickets(int $quantity): string {
+        if($this->sold_tickets + $this->reserved_tickets + $quantity > $this->total_tickets){
+            return "";
+        }
+        $this->setReservedTickets($this->reserved_tickets - $quantity);
+        $this->setSoldTickets($this->getSoldTickets() + $quantity);
+        return "ok";
+    }
 
 
 }

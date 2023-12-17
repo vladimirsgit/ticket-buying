@@ -19,7 +19,8 @@ $routes = [
     '/tickets/eventDetails' => 'public/event_details.php',
     '/tickets/add_to_cart.php' => 'src/ticketBuying/add_to_cart.php',
     '/tickets/cart' => 'public/shopping_cart.php',
-    '/tickets/update_cart.php' => 'src/ticketBuying/update_cart.php'
+    '/tickets/update_cart.php' => 'src/ticketBuying/update_cart.php',
+    '/tickets/buy_tickets.php' => 'src/ticketBuying/buy_tickets.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();

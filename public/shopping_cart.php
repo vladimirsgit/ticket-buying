@@ -7,7 +7,9 @@
     <?php include 'includes/stylesheets.html' ?>
 </head>
 <body>
-<?php
+<?php if(!isset($_SESSION['username'])){
+    header('Location: /tickets/');
+}
 include 'includes/header.php';?>
 <main>
     <div class="container mt-5">
@@ -33,10 +35,24 @@ include 'includes/header.php';?>
             <h4>Total: <?php echo $totalValue; ?> GOLD</h4>
         </div>
 
-        <form action="checkout_cart.php" method="post">
+        <form action="buy_tickets.php" method="post">
+            <?php if (isset($_SESSION['invalid_data'])) { ?>
+                <p style="color: red">Invalid data, impossible to buy.</p>
+            <?php } unset($_SESSION['invalid_data']);?>
+            <?php if (isset($_SESSION['expired_entries'])) { ?>
+                <p style="color: red">You cannot buy expired reservations.</p>
+            <?php } unset($_SESSION['expired_entries']);?>
+            <?php if (isset($_SESSION['sold_out'])) { ?>
+                <p style="color: red">Sold out.</p>
+            <?php } unset($_SESSION['sold_out']);?>
+            <?php if (isset($_SESSION['not_enough_tickets'])) { ?>
+                <p style="color: red">The selected amount exceeds our availability.</p>
+            <?php } unset($_SESSION['not_enough_tickets']);?>
+            <?php if (isset($_SESSION['tickets_bought'])) { ?>
+                <p style="color: #30bde7">Purchase successful. Please check your email to see your tickets.</p>
+            <?php } unset($_SESSION['tickets_bought']);?>
             <div class="text-end mt-4">
-                <input type="hidden" name="action" value="checkout">
-                <button type="submit" class="btn btn-primary">Checkout</button>
+                <button type="submit" class="btn btn-warning" name="buy_tickets">Buy now</button>
             </div>
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
         </form>

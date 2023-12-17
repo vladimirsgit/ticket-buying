@@ -17,15 +17,20 @@ $userId = $user->getId();
 
 $cartEntries = $cartRepository->findBy(['userId' => $userId]);
 
+$userIdAndEventsIdArray = [];
+$userIdAndEventsIdArray[0] = $userId;
+
 $eventsFromCart = [];
 
 $eventIdWithQuantities = [];
 
 foreach ($cartEntries as $cart_entry){
-    array_push($eventsFromCart, $eventRepository->find($cart_entry->getEventId()));
-
+    $eventsFromCart[] = $eventRepository->find($cart_entry->getEventId());
+    $userIdAndEventsIdArray[] = $cart_entry->getEventId();
     $eventIdWithQuantities[$cart_entry->getEventId()] = $cart_entry->getQuantity();
 }
+$_SESSION['cart_data_ids'] = $userIdAndEventsIdArray;
+
 $i = 0;
 $totalValue = 0;
 foreach ($eventsFromCart as $eventFromCart){
