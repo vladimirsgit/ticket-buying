@@ -30,7 +30,7 @@ if($user == null){
 
 validateName($lastname, $firstname);
 
-validateNewEmail($newEmail, $confirmedNewEmail);
+validateNewEmail($newEmail, $confirmedNewEmail, $entityManager);
 
 validateProfileUpdatePasswordFields($password, $user, $newPassword, $confirmedNewPassword);
 

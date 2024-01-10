@@ -68,6 +68,9 @@ include 'includes/header.php';
             <?php if (isset($_SESSION['email_invalid'])) {?>
                 <p style="color: red">Invalid email address</p>
             <?php } unset($_SESSION['email_invalid']);?>
+            <?php if (isset($_SESSION['not_available'])) {?>
+                <p style="color: red">Email address not available</p>
+            <?php } unset($_SESSION['not_available']);?>
             <?php if (isset($_SESSION['newEmail_not_matching'])) {?>
                 <p style="color: red">New email and confirm new email fields do not match!</p>
             <?php } unset($_SESSION['newEmail_not_matching']);?>

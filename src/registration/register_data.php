@@ -23,6 +23,10 @@ if($repository->findOneBy(['username' => $username])){
     setSessionAttributeAndRedirect('username_taken', '/tickets/register');
 }
 
+if($repository->findOneBy(['email' => $email])){
+    setSessionAttributeAndRedirect('email_taken', '/tickets/register');
+}
+
 validateRegistrationFormData($lastname, $firstname, $email, $confirmed_email, $username, $password, $confirmed_password);
 
 $password = password_hash($password, PASSWORD_DEFAULT);

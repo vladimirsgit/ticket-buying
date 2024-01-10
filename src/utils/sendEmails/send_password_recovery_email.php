@@ -1,5 +1,5 @@
 <?php
-
+require_once 'mail_sender.php';
 function sendPasswordRecoveryEmail($email, $recoveryToken, $username): void{
     $passwordRecoveryLink = "http://localhost:8080/tickets/change_password.php?token=" . $recoveryToken . "&username=" . $username;
 

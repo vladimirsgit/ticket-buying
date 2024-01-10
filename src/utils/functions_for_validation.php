@@ -26,12 +26,14 @@ function validateEmailAndPossiblyUsername($email, $username = null, $headerLocat
     }
 }
 
-function validateNewEmail($newEmail, $confirmedNewEmail): void{
+function validateNewEmail($newEmail, $confirmedNewEmail, $entityManager): void{
     if(!empty($newEmail)){
         if($newEmail !== $confirmedNewEmail){
             setSessionAttributeAndRedirect('newEmail_not_matching', '/tickets/profile');
         } else if($newEmail === $_SESSION['email']){
             setSessionAttributeAndRedirect('email_the_same', '/tickets/profile');
+        } else if($entityManager->getRepository(User::class)->findOneBy(['email' => $newEmail]) != null){
+            setSessionAttributeAndRedirect('not_available', '/tickets/profile');
         } else validateEmailAndPossiblyUsername($newEmail, null, '/tickets/profile');
     }
 }
