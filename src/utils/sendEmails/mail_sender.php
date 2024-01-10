@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 require_once 'vendor/autoload.php';
 require_once 'mail_config.php';
 
-function sendEmail($to, $subject, $message, $name = ''): void {
+function sendEmail($to, $subject, $message, $name = '', $attachmentsArray = null): void {
     global $mailUsername, $mailPassword;
 
     $mail = new PHPMailer(true);
@@ -23,6 +23,12 @@ function sendEmail($to, $subject, $message, $name = ''): void {
 
         $mail->setFrom($mailUsername, 'Ticketastic');
         $mail->addAddress($to, $name);
+
+        $i = 1;
+        foreach ($attachmentsArray as $ticket){
+            error_log($ticket);
+            $mail->addStringAttachment($ticket,  'ticket' . $i++ . '.pdf');
+        }
 
         $mail->Subject = $subject;
         $mail->AltBody = 'To view this post you need a compatible HTML viewer!';

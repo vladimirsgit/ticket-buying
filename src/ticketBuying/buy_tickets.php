@@ -4,7 +4,8 @@ require_once 'src/utils/buying/validate_cart_entries.php';
 require_once 'models/cart_entry.php';
 require_once 'models/event.php';
 require_once 'models/user.php';
-
+require_once 'src/ticketBuying/create_ticket.php';
+require_once 'src/utils/sendEmails/send_tickets_email.php';
 checkCSRFtoken();
 
 $cartRepository = $entityManager->getRepository(CartEntry::class);
@@ -39,10 +40,11 @@ for($i = 1; $i < sizeof($events_ids_from_cart_session); $i++){
 
 $valid_event_ids_and_their_quantities = validate_post_and_db($cart_entries_from_db, $events_ids_from_cart_session, $userId, $eventRepository);
 
-modify_events_and_save_data($valid_event_ids_and_their_quantities, $userId, $entityManager, $eventRepository, $cartRepository);
+$tickets = modify_events_and_create_tickets($valid_event_ids_and_their_quantities, $userId, $entityManager, $eventRepository, $cartRepository);
 
-
-//@TODO SEND EMAIL!!!!
-
+foreach ($tickets as $ticket){
+    error_log($ticket);
+}
+sendTicketsEmail($user->getEmail(), $user->getUsername(), $tickets);
 
 setSessionAttributeAndRedirect('tickets_bought', '/tickets/cart');
