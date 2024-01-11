@@ -2,7 +2,6 @@
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 require_once 'vendor/autoload.php';
 require_once 'db_config.php';
-
 $routes = [
     '/tickets/' => 'public/home.php',
     '/tickets/register' => 'public/register_form.php',
@@ -21,7 +20,8 @@ $routes = [
     '/tickets/cart' => 'public/shopping_cart.php',
     '/tickets/update_cart.php' => 'src/ticketBuying/update_cart.php',
     '/tickets/buy_tickets.php' => 'src/ticketBuying/buy_tickets.php',
-    '/tickets/pdf' => 'src/ticketBuying/create_ticket.php'
+    '/tickets/parse_sun_data.php' => 'src/parse_sun_data.php',
+    '/tickets/analytics.php' => 'src/analytics.php'
 ];
 if(session_status() === PHP_SESSION_NONE){
     session_start();
@@ -32,8 +32,28 @@ if(!isset($_SESSION['csrf_token'])){
 }
 
 if(array_key_exists($uri, $routes)){
+    doAnalytics();
     require $routes[$uri];
 } else {
     http_response_code(404);
     require 'views/404.php';
+}
+
+
+function doAnalytics(){
+    require_once 'models/visitor.php';
+    global $entityManager;
+    if($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']) return;
+    $visitorRepository = $entityManager->getRepository(Visitor::class);
+
+    $IP = $_SERVER['REMOTE_ADDR'];
+    $visitor = $visitorRepository->find($IP);
+
+    if($visitor == null){
+        $visitor = new Visitor($IP, 1);
+    } else {
+        $visitor->setVisits($visitor->getVisits() + 1);
+    }
+    $entityManager->persist($visitor);
+    $entityManager->flush();
 }

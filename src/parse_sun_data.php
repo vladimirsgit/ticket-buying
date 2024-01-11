@@ -1,24 +1,32 @@
 <?php
 
-$url = 'https://www.timeanddate.com/sun/@40.71,-73.98';
+parseSunData();
+function parseSunData(): void{
+    $lat = $_GET['lat'] ?? null;
+    $long = $_GET['long'] ?? null;
 
-$curl = curl_init($url);
+    $url = 'https://www.timeanddate.com/sun/@' . $lat . ',' . $long;
 
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl, CURLOPT_HEADER, 0);
+    $curl = curl_init($url);
 
-$html = curl_exec($curl);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_HEADER, 0);
 
-curl_close($curl);
+    $html = curl_exec($curl);
 
-if($html === false){
-    exit("Error fetching content");
+    curl_close($curl);
+
+    if ($html === false) {
+        exit("Error fetching content");
+    }
+
+
+    $dom = new DOMDocument();
+
+    @$dom->loadHTML($html);
+
+    $table = $dom->getElementsByTagName('table');
+
+    echo $dom->saveHTML($table[0]);
 }
 
-
-echo $html;
-$dom = new DOMDocument();
-
-@$dom->loadHTML($html);
-
-$divs = $dom->getElementsByTagName('div');

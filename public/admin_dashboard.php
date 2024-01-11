@@ -1,5 +1,6 @@
 <?php global $entityManager;
 require 'src/adminActions/validate_admin_rights.php';
+require_once 'models/visitor.php';
 if(isset($_POST['roleAction'])){
     require 'src/adminActions/change_role.php';
 } else if(isset($_POST['add_event'])){

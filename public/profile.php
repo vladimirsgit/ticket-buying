@@ -111,7 +111,7 @@ include 'includes/header.php';
         </form>
     </div>
 </main>
-<script src="public/js/confirm_deletion.js"></script>
+
 </body>
 <?php
 include 'includes/footer.php';

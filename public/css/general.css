@@ -16,7 +16,7 @@ body{
 main{
     margin-left: var(--margin-spacing);
     margin-right: var(--margin-spacing);
-    /*margin-top: var(--margin-spacing);*/
+    margin-top: var(--margin-spacing);
 }
 nav{
     background-color: var(--header-color);
