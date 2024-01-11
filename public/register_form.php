@@ -54,6 +54,9 @@ include 'includes/header.php';
                 <?php if (isset($_SESSION['emails_not_matching'])) { ?>
                     <p style="color: red">Email addresses do not match!</p>
                 <?php } unset($_SESSION['emails_not_matching']);?>
+                <?php if (isset($_SESSION['email_taken'])) { ?>
+                    <p style="color: red">Email addresses do not match!</p>
+                <?php } unset($_SESSION['email_taken']);?>
             </div>
 
             <div class="form-group">
