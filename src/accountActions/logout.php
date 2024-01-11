@@ -4,4 +4,4 @@ $_SESSION = array();
 
 session_destroy();
 
-header('Location: http://localhost:8080/tickets/login');
+header('Location: https://ticketastic.store/login');

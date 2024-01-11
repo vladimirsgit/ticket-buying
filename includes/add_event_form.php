@@ -9,7 +9,7 @@
         <p style="color: #30bde7">Event added!</p>
     <?php } unset($_SESSION['add_event_OK'])?>
     <h2 class="text-center">Add Event Form</h2>
-    <form id="add_event_form" action="/tickets/adminDashboard" method="post">
+    <form id="add_event_form" action="/adminDashboard" method="post">
         <div class="form-group">
             <label for="eventName">Event Name</label>
             <input type="text" class="form-control" name="event_name" placeholder="Enter event name" >

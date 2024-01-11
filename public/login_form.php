@@ -1,5 +1,5 @@
 <?php if(isset($_SESSION['username'])){
-    header('Location: http://localhost:8080/tickets/profile');
+    header('Location: https://ticketastic.store/profile');
 }
 if (isset($_POST['login'])) {
     require 'src/accountActions/login_data.php';
@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
             <?php if (isset($_SESSION['password_changed'])) {?>
                 <p style="color: red">You can now login using your new password!</p>
             <?php } unset($_SESSION['password_changed']);?>
-            <p class="mb-3"><a href="/tickets/forgotPassword">Forgot password</a></p>
+            <p class="mb-3"><a href="/forgotPassword">Forgot password</a></p>
 
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <?php if(isset($_COOKIE['ok_cookies'])){

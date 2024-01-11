@@ -1,9 +1,9 @@
 <?php if(!isset($_SESSION['allowed_to_change_password'])){
-    header('Location: /tickets/');
+    header('Location: /');
 } else if(time() - $_SESSION['allowed_to_change_password'] > 600){
     unset($_SESSION['allowed_to_change_password']);
     $_SESSION['change_password_link_expired'] = true;
-    header('Location: /tickets/forgotPassword');
+    header('Location: /forgotPassword');
 } if(isset($_POST['changePassword'])){
     require 'src/accountActions/change_password.php';
 }

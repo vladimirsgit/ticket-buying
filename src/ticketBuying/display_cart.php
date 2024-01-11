@@ -10,7 +10,7 @@ $eventRepository = $entityManager->getRepository(Event::class);
 $user = $userRepository->findOneBy(['username' => $_SESSION['username']]);
 
 if($user == null) {
-    setSessionAttributeAndRedirect('invalid_data', '/tickets/');
+    setSessionAttributeAndRedirect('invalid_data', '/');
 }
 
 $userId = $user->getId();

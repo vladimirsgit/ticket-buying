@@ -8,7 +8,7 @@
 </head>
 <body>
 <?php if(!isset($_SESSION['username'])){
-    header('Location: /tickets/');
+    header('Location: /');
 }
 include 'includes/header.php';?>
 <main>

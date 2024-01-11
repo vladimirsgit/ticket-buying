@@ -3,8 +3,9 @@ window.onload = () => {
     setInterval(getVisitorData, 1000);
 }
 
+
 function getVisitorData(){
-    fetch('http://localhost:8080/tickets/analytics.php').then(response => response.json())
+    fetch('https://ticketastic.store/analytics.php').then(response => response.json())
         .then(response => {
             let visitDiv = document.getElementById('analytics');
 

@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", function(){
     this.document.getElementById("ok_cookies").onclick = () => {
         setCookie("ok_cookies", true);
         this.document.getElementById("cookies_banner").style.display = "none";
-        if(window.location.pathname !== '/tickets/'){
+        if(window.location.pathname !== '/'){
             location.reload();
         }
     }

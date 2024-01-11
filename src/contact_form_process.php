@@ -11,7 +11,7 @@ $subject = $_POST['subject'] ?? '';
 $message = $_POST['message'] ?? '';
 
 if(checkIfFieldsAreEmpty($name, $email, $subject, $message)){
-    setSessionAttributeAndRedirect('empty_fields', '/tickets/contact');
+    setSessionAttributeAndRedirect('empty_fields', '/contact');
 }
 
 $name = htmlspecialchars($name);
@@ -20,7 +20,7 @@ $subject = htmlspecialchars($subject);
 $message = htmlspecialchars($message);
 
 if(!$email){
-    setSessionAttributeAndRedirect('invalid_email', '/tickets/contact');
+    setSessionAttributeAndRedirect('invalid_email', '/contact');
 }
 
 sendContactFormEmailToUser($email, $name, $message);

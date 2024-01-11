@@ -6,20 +6,20 @@ function validate_post_and_db($cart_entries_from_db, $events_ids_from_cart_sessi
 
     foreach ($cart_entries_from_db as $cart_entry){
         if($cart_entry->getUserId() != $userId){
-            setSessionAttributeAndRedirect('invalid_data', '/tickets/cart');
+            setSessionAttributeAndRedirect('invalid_data', '/cart');
         }
         if(!in_array($cart_entry->getEventId(), $events_ids_from_cart_session)){
-            setSessionAttributeAndRedirect('invalid_data', '/tickets/cart');
+            setSessionAttributeAndRedirect('invalid_data', '/cart');
         }
         $valid_event_ids_and_their_quantities[$cart_entry->getEventId()] = $cart_entry->getQuantity();
     }
     foreach ($valid_event_ids_and_their_quantities as $eventId => $quantity) {
         $event = $eventRepository->find($eventId);
         if ($event == null) {
-            setSessionAttributeAndRedirect('invalid_data', '/tickets/cart');
+            setSessionAttributeAndRedirect('invalid_data', '/cart');
         }
         if($event->isSoldOut()){
-            setSessionAttributeAndRedirect('sold_out', '/tickets/cart');
+            setSessionAttributeAndRedirect('sold_out', '/cart');
         }
     }
     return $valid_event_ids_and_their_quantities;

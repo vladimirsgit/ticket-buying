@@ -27,4 +27,4 @@ $user->setConfirmedemail(true);
 $entityManager->persist($user);
 $entityManager->flush();
 
-header('Location: http://localhost:8080/tickets/login');
+header('Location: https://ticketastic.store/login');

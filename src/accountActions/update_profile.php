@@ -25,7 +25,7 @@ $repository = $entityManager->getRepository(User::class);
 $user = $repository->findOneBy(['username' => $_SESSION['username']]);
 
 if($user == null){
-    setSessionAttributeAndRedirect('user_not_found', '/tickets/profile');
+    setSessionAttributeAndRedirect('user_not_found', '/profile');
 }
 
 validateName($lastname, $firstname);
@@ -45,7 +45,7 @@ $newPassword = !empty($newPassword) ? "True" : "False";
 
 sendProfileUpdateEmail($email, $username, $lastname, $firstname, $newPassword);
 
-setSessionAttributeAndRedirect('update_success', '/tickets/profile');
+setSessionAttributeAndRedirect('update_success', '/profile');
 
 
 

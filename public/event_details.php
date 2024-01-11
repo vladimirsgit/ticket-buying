@@ -16,7 +16,7 @@ $eventRepository = $entityManager->getRepository(Event::class);
 $eventId = $_GET['id'];
 $event = $eventRepository->findOneBy(['id' => $eventId]);
 if($event == null){
-    header('Location: /tickets/notFound');
+    header('Location: /notFound');
     exit;
 }
 $_SESSION['event_id_for_cart'] = $eventId;
@@ -52,7 +52,7 @@ $_SESSION['event_id_for_cart'] = $eventId;
             <p style="color: red">Unfortunately the event is sold out.</p>
         <?php } unset($_SESSION['event_sold_out']);?>
         <?php if (isset($_SESSION['add_to_cart_success'])) { ?>
-            <p style="color: #30bde7">You have successfully added to <a href="/tickets/cart">cart</a> <span style="color: red"> <?php echo $_SESSION['add_to_cart_success'] ?></span> tickets.</p>
+            <p style="color: #30bde7">You have successfully added to <a href="/cart">cart</a> <span style="color: red"> <?php echo $_SESSION['add_to_cart_success'] ?></span> tickets.</p>
         <?php } unset($_SESSION['add_to_cart_success']);?>
     <div class="mt-3">
         <form method="post" action="add_to_cart.php">
@@ -74,7 +74,7 @@ $_SESSION['event_id_for_cart'] = $eventId;
             <input type="hidden" class="form-control" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
         </form>
     </div> <?php } else { ?> <div class="mt-3">
-        <p>Please <a href="/tickets/login">log in</a> or <a href="/tickets/register">register</a> to make a purchase</p>
+        <p>Please <a href="/login">log in</a> or <a href="/register">register</a> to make a purchase</p>
     </div> <?php } ?>
 </main>
 </body>

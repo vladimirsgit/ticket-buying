@@ -9,7 +9,7 @@ $password = $_POST['newPassword'] ?? '';
 $confirmedPassword = $_POST['confirmedNewPassword'] ?? '';
 
 if($password !== $confirmedPassword){
-    setSessionAttributeAndRedirect('newpassword_confirm_not_matching', '/tickets/setNewPassword');
+    setSessionAttributeAndRedirect('newpassword_confirm_not_matching', '/setNewPassword');
 }
 
 $username = $_SESSION['username_to_change_password'] ?? '';
@@ -37,4 +37,4 @@ session_regenerate_id(true);
 
 $_SESSION['password_changed'] = true;
 
-header('Location: /tickets/login');
+header('Location: /login');

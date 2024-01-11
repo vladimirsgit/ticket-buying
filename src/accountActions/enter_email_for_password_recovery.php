@@ -7,17 +7,17 @@ $email = $_POST['email'] ?? '';
 
 checkCSRFtoken();
 
-validateEmailAndPossiblyUsername($email, null, '/tickets/forgotPassword');
+validateEmailAndPossiblyUsername($email, null, '/forgotPassword');
 
 
 $userRepository = $entityManager->getRepository(User::class);
 $user = $userRepository->findOneBy(['email' => $email]);
 
 if($user == null){
-    setSessionAttributeAndRedirect('user_not_found', '/tickets/forgotPassword');
+    setSessionAttributeAndRedirect('user_not_found', '/forgotPassword');
 }
 //if(!empty($user->getResetPasswordtoken())){
-//    setSessionAttributeAndRedirect('already_requested', '/tickets/forgotPassword');
+//    setSessionAttributeAndRedirect('already_requested', '/forgotPassword');
 //}
 
 $passwordRecoveryToken = bin2hex(openssl_random_pseudo_bytes(64));

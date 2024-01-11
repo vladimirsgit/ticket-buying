@@ -17,7 +17,7 @@ if ("geolocation" in navigator) {
 
 
 function fetchSunData(lat, long){
-    fetch(`http://localhost:8080/tickets/parse_sun_data.php?lat=${lat}&long=${long}`).then(response => response.text())
+    fetch(`https://ticketastic.store/parse_sun_data.php?lat=${lat}&long=${long}`).then(response => response.text())
         .then(html => {
 
         let sundiv = document.getElementById('sun-div');

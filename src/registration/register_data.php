@@ -20,11 +20,11 @@ $confirmed_password = $_POST['confirmPassword'] ?? '';
 $repository = $entityManager->getRepository(User::class);
 
 if($repository->findOneBy(['username' => $username])){
-    setSessionAttributeAndRedirect('username_taken', '/tickets/register');
+    setSessionAttributeAndRedirect('username_taken', '/register');
 }
 
 if($repository->findOneBy(['email' => $email])){
-    setSessionAttributeAndRedirect('email_taken', '/tickets/register');
+    setSessionAttributeAndRedirect('email_taken', '/register');
 }
 
 validateRegistrationFormData($lastname, $firstname, $email, $confirmed_email, $username, $password, $confirmed_password);

@@ -5,7 +5,7 @@
 }
 ?>
 <?php if(!isset($_SESSION['username'])){
-    header('Location: http://localhost:8080/tickets/login');
+    header('Location: https://ticketastic.store/login');
 }
 ?>
 <!DOCTYPE html>

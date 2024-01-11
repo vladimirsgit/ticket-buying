@@ -21,5 +21,5 @@ $entityManager->persist($cartEntry);
 $entityManager->flush();
 
 $_SESSION['add_to_cart_success'] = $quantity;
-header('Location: /tickets/eventDetails?id=' . $eventId);
+header('Location: /eventDetails?id=' . $eventId);
 exit;

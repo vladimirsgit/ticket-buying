@@ -7,10 +7,10 @@ function validatePostRequestData($eventId, $username, $quantity): int
     global $entityManager;
 
     if(empty($eventId)) {
-        setSessionAttributeAndRedirect('invalid_data', '/tickets/');
+        setSessionAttributeAndRedirect('invalid_data', '/');
     }
     if (!filter_var($quantity, FILTER_VALIDATE_INT) || $quantity < 1 || $quantity > 5) {
-        setSessionAttributeAndRedirect('invalid_data', '/tickets/');
+        setSessionAttributeAndRedirect('invalid_data', '/');
     }
     $eventRepository = $entityManager->getRepository(Event::class);
     $event = $eventRepository->findBy(['id' => $eventId]);
@@ -19,7 +19,7 @@ function validatePostRequestData($eventId, $username, $quantity): int
     $user = $userRepository->findOneBy(['username' => $username]);
 
     if ($user == null || $event == null) {
-        setSessionAttributeAndRedirect('invalid_data', '/tickets/');
+        setSessionAttributeAndRedirect('invalid_data', '/');
     }
 
     return $user->getId();
@@ -36,15 +36,15 @@ function validateUserAllowedToReserve($entityManager, $eventId, $userId): void{
 
     if(sizeof($cartEntriesForUser) == 2){
         $dateWhenMoreCanBeAdded = $cartEntriesForUser[0]->getCreatedAt()->modify('+12 hours')->format('Y-m-d H:i');
-        setSessionAttributeAndRedirect('max_reservations', '/tickets/eventDetails?id=' . $eventId, $dateWhenMoreCanBeAdded);
+        setSessionAttributeAndRedirect('max_reservations', '/eventDetails?id=' . $eventId, $dateWhenMoreCanBeAdded);
     }
     $cartEntry = $cartRepository->findOneBy(['eventId' => $eventId, 'userId' => $userId]);
     if($cartEntry != null && $cartEntry->isExpired()){
         $dateWhenNewReservationIsAllowed = $cartEntry->getCreatedAt()->modify('+12 hours')->format('Y-m-d H:i');
-        setSessionAttributeAndRedirect('reservation_expired', '/tickets/eventDetails?id=' . $eventId, $dateWhenNewReservationIsAllowed);
+        setSessionAttributeAndRedirect('reservation_expired', '/eventDetails?id=' . $eventId, $dateWhenNewReservationIsAllowed);
     }
     if($cartEntry != null){
-        setSessionAttributeAndRedirect('already_in_cart', '/tickets/eventDetails?id=' . $eventId);
+        setSessionAttributeAndRedirect('already_in_cart', '/eventDetails?id=' . $eventId);
     }
 
 
@@ -59,10 +59,10 @@ function validateTicketsAvailable($entityManager, $eventId, $quantity): void{
 
     $freeTickets = $eventTotalTickets - $eventSoldTickets - $eventReservedTickets;
     if($freeTickets == 0){
-        setSessionAttributeAndRedirect('event_sold_out', '/tickets/eventDetails?id=' . $eventId);
+        setSessionAttributeAndRedirect('event_sold_out', '/eventDetails?id=' . $eventId);
     }
     if($quantity > $freeTickets){
-        setSessionAttributeAndRedirect('free_tickets_left', '/tickets/eventDetails?id=' . $eventId, $freeTickets);
+        setSessionAttributeAndRedirect('free_tickets_left', '/eventDetails?id=' . $eventId, $freeTickets);
     }
 
     $event->setReservedTickets($event->getReservedTickets() + $quantity);

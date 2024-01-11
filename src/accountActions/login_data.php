@@ -13,15 +13,15 @@ $repository = $entityManager->getRepository(User::class);
 $user = $repository->findOneBy(['username'=>$username]);
 
 if($user == null){
-    setSessionAttributeAndRedirect('username_and_password_not_matching', '/tickets/login');
+    setSessionAttributeAndRedirect('username_and_password_not_matching', '/login');
 }
 
 if(!$user->isConfirmedemail()){
-    setSessionAttributeAndRedirect('email_not_confirmed', '/tickets/login');
+    setSessionAttributeAndRedirect('email_not_confirmed', '/login');
 }
 
 if(!password_verify($password, $user->getPassword())){
-    setSessionAttributeAndRedirect('username_and_password_not_matching', '/tickets/login');
+    setSessionAttributeAndRedirect('username_and_password_not_matching', '/login');
 }
 
 session_regenerate_id(true);
@@ -35,4 +35,4 @@ $_SESSION['created'] = $user->getCreatedAt();
 $_SESSION['role'] = $user->getRole();
 $_SESSION['welcome'] = true;
 
-header('Location: /tickets/');
+header('Location: /');

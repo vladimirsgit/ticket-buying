@@ -19,10 +19,10 @@ $user = $userRepository->findOneBy(['username' => $username]);
 $events_ids_from_cart_session = $_SESSION['cart_data_ids'] ?? '';
 
 if(sizeof($events_ids_from_cart_session) < 2){
-    setSessionAttributeAndRedirect('invalid_data', '/tickets/cart');
+    setSessionAttributeAndRedirect('invalid_data', '/cart');
 }
 if($username == null){
-    setSessionAttributeAndRedirect('invalid_data', '/tickets/cart');
+    setSessionAttributeAndRedirect('invalid_data', '/cart');
 }
 
 $userId = $user->getId();
@@ -34,7 +34,7 @@ for($i = 1; $i < sizeof($events_ids_from_cart_session); $i++){
     $cart_entry = $cartRepository->findOneBy(['userId' => $userId, 'eventId' => $events_ids_from_cart_session[$i]]);
 
     if($cart_entry->isExpired()){
-        setSessionAttributeAndRedirect('expired_entries', '/tickets/cart');
+        setSessionAttributeAndRedirect('expired_entries', '/cart');
     }
 }
 
@@ -47,4 +47,4 @@ foreach ($tickets as $ticket){
 }
 sendTicketsEmail($user->getEmail(), $user->getUsername(), $tickets);
 
-setSessionAttributeAndRedirect('tickets_bought', '/tickets/cart');
+setSessionAttributeAndRedirect('tickets_bought', '/cart');

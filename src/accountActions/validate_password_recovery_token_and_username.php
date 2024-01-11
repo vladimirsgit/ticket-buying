@@ -7,7 +7,7 @@ $token = $_GET['token'] ?? '';
 
 
 if(empty($username) || empty($token)){
-    setSessionAttributeAndRedirect('invalid_pass_change', '/tickets/');
+    setSessionAttributeAndRedirect('invalid_pass_change', '/');
 }
 
 $repository = $entityManager->getRepository(User::class);
@@ -37,4 +37,4 @@ $_SESSION['allowed_to_change_password'] = time();
 $_SESSION['username_to_change_password'] = $user->getUsername();
 
 error_log($_SESSION['username_to_change_password']);
-header('Location: /tickets/setNewPassword');
+header('Location: /setNewPassword');
