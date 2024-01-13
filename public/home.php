@@ -13,7 +13,7 @@
         <div id="analytics"></div>
         <div id="sun-div"></div>
         <?php
-
+	
         $timeZone= new DateTimeZone('UTC');
             $timeNow = new DateTime('now', $timeZone);
         if(isset($_SESSION['welcome']) && $_SESSION['welcome']){
